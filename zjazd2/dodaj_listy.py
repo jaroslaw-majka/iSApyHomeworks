@@ -3,10 +3,7 @@
 # Jeżeli listy są różnej długości, funkcja powinna wyświetlić napis ‘Podane listy muszą być tej samej długości’
 
 def dodaj_listy(list_1, list_2):
-    summed_list = []
     if len(list_1) != len(list_2):
         return 'Podane listy muszą być tej samej długości.'
     else:
-        for idx in range(len(list_1)):
-            summed_list.insert(idx, list_1[idx] + list_2[idx])
-    return summed_list
+        return [list_1[idx] + list_2[idx] for idx in range(len(list_1))]
