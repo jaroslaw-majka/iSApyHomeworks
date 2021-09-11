@@ -19,6 +19,6 @@ def zbadaj_trojkat(side_a, side_b, side_c):
             return 'Trójkąt równoboczny'
         # różnoboczny
         else:
-            return 'Trójąt różnoboczny'
+            return 'Trójkąt różnoboczny'
     else:
         return 'Trójkąt nieprawidłowy'
