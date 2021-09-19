@@ -58,29 +58,33 @@ class Store:
         else:
             print('Nie masz takie ryby na stanie.')
 
+    def dry_stock_name_check(self, name=''):
+        if not name:
+            name = input('Jaki przedmiot sprzedajesz: ')
+        for item in Store.drystock_list:
+            if item.item_name == name:
+                return item
+
     def adding_dry_stock(self):
         item_name = input('Podaj nazwę produktu: ')
-        item_type = input('Podaj rodzaj (karma, akwarium, akcesoria) produktu: ')
-        item_brand = input('Podaj markę produktu: ')
         amount = int(input('Ile sztuk dodajesz: '))
-        # TODO Sprawdź, czy ten przedmiot istnieje i jeżel itak to dodaj do stanu
-        Store.drystock_list.append(DryStock(item_name, item_type, item_brand, amount))
+        item_present = self.dry_stock_name_check(item_name)
+        if item_present:
+            item_present.stock += amount
+        else:
+            item_type = input('Podaj rodzaj (karma, akwarium, akcesoria) produktu: ')
+            item_brand = input('Podaj markę produktu: ')
+            Store.drystock_list.append(DryStock(item_name, item_type, item_brand, amount))
 
     def drystock_display(self):
         for item in Store.drystock_list:
             item.print_dry_stock_list()
 
     def dry_stock_sale(self):
-        def dry_stock_name_check():
-            name = input('Jaki przedmiot sprzedajesz: ')
-            for item in Store.drystock_list:
-                if item.item_name == name:
-                    return item
-
         def dry_stock_amount_check(item_obj, amount):
             return item_obj.stock >= amount
 
-        item_for_sale = dry_stock_name_check()
+        item_for_sale = self.dry_stock_name_check()
         if item_for_sale:
             amount = int(input('Ile sztuk sprzedajesz: '))
             if dry_stock_amount_check(item_for_sale, amount):
