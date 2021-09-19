@@ -48,13 +48,10 @@ class Store:
                f'Ilość sztuk: {fish.amount}\n') for fish in Store.livestock_list]
 
     def livestock_sale(self):
-        def livestock_amount_check(fish_obj, amount_for_sale):
-            return fish_obj.amount >= amount_for_sale
-
         fish_for_sale = self.livestock_name_check()
         if fish_for_sale:
             amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
-            if livestock_amount_check(fish_for_sale, amount):
+            if fish_for_sale.amount >= amount:
                 fish_for_sale.make_a_sale(amount)
             else:
                 print('Nie masz wystarczającej liczby ryb.')
@@ -84,14 +81,13 @@ class Store:
             item.print_dry_stock_list()
 
     def dry_stock_sale(self):
-        def dry_stock_amount_check(item_obj, amount):
-            return item_obj.stock >= amount
-
         item_for_sale = self.dry_stock_name_check()
         if item_for_sale:
             amount = int(input('Ile sztuk sprzedajesz: '))
-            if dry_stock_amount_check(item_for_sale, amount):
+            if item_for_sale.stock >= amount:
                 item_for_sale.make_a_sale(amount)
+            else:
+                print(f'Nie masz wystarczającej liczby {item_for_sale.item_name}')
         else:
             print('Nie ma tego produktu na stanie.')
 
