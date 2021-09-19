@@ -5,6 +5,9 @@ from livestock import FishStock
 class Store:
     livestock_list = []
     drystock_list = []
+    # TODO Implement loyalty card functionality and card history
+    card_list = []
+    card_history = []
 
     def __init__(self):
         self.main()
