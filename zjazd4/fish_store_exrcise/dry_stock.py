@@ -12,17 +12,21 @@ class DryStock:
         self.brand = brand
         self.stock = stock
 
-    def print_dry_stock_list(self):
-        for key, value in vars(self).items():
-            print(key, value)
-
-    # alternative for above stock displayer
-    def __str__(self):
+    def __str__(self) -> str:
+        '''
+        Overwrites the way data is presented when Store.drystock_display func is called
+        :return: string formatting for list item display
+        '''
         return f'Nazwa: {vars(self)["item_name"]}, ' \
                f'Producent: {vars(self)["brand"]}, ' \
                f'Ilość sztuk: {vars(self)["stock"]}'
 
-    def make_a_sale(self, amount):
+    def make_a_sale(self, amount: int) -> int:
+        '''
+        Deducts sold quantity from available stock
+        :param amount: quantity of items sold that need to be deducted from available stock
+        :return: updated stock
+        '''
         if isinstance(amount, (int, float)):
             self.stock -= amount
         else:
