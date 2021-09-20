@@ -44,9 +44,9 @@ class Store:
             Store.livestock_list.append(FishStock(fish_name, fish_origin, amount, freshwater))
 
     def livestock_display(self):
-        [print(f'Nazwa: {fish.name}\n'
-               f'Pochodzenie: {fish.origin}\n'
-               f'Ilość sztuk: {fish.amount}\n') for fish in Store.livestock_list]
+        [print(f'Nazwa: {fish.name}, '
+               f'Pochodzenie: {fish.origin}, '
+               f'Ilość sztuk: {fish.amount}') for fish in Store.livestock_list]
 
     def livestock_sale(self):
         fish_for_sale = self.livestock_name_check()
@@ -54,6 +54,7 @@ class Store:
             amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
             if fish_for_sale.amount >= amount:
                 fish_for_sale.make_a_sale(amount)
+                self.loyalty_points_incrementator(amount)
             else:
                 print('Nie masz wystarczającej liczby ryb.')
         else:
@@ -101,7 +102,7 @@ class Store:
         card_used = self.card_retriever()
         if card_used:
             card_used.add_points(points_amount)
-            print(f'Current number of points: {card_used.collected_points}')
+            print(f'{points_amount} punkty dodane, całkowita ilość punktów: {card_used.collected_points}')
         else:
             print('Do tej transakcji nie podano karty lojalnościowej')
 
