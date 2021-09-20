@@ -87,6 +87,7 @@ class Store:
             amount = int(input('Ile sztuk sprzedajesz: '))
             if item_for_sale.stock >= amount:
                 item_for_sale.make_a_sale(amount)
+                self.loyalty_points_incrementator(amount)
             else:
                 print(f'Nie masz wystarczającej liczby {item_for_sale.item_name}')
         else:
@@ -95,7 +96,20 @@ class Store:
     def add_new_loyalty_card(self):
         customer_phone = input('Podaj numer telefonu klienta: ')
         Store.card_list.append(LoyaltyCard(customer_phone))
-        print(Store.card_list)
+
+    def loyalty_points_incrementator(self, points_amount):
+        card_used = self.card_retriever()
+        if card_used:
+            card_used.add_points(points_amount)
+            print(f'Current number of points: {card_used.collected_points}')
+        else:
+            print('Do tej transakcji nie podano karty lojalnościowej')
+
+    def card_retriever(self):
+        card_no = input('Podaj numer karty lojalnościowej (zostaw puste, jeżeli nie ma karty): ')
+        for card in Store.card_list:
+            if card.card_idx == int(card_no):
+                return card
 
     def main(self):
         while True:
