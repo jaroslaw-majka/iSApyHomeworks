@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class LoyaltyCard:
     next_card_idx = 1
 
@@ -18,3 +21,7 @@ class LoyaltyCard:
 
     #TODO History:
         # History should save the date, name of the item and quantity bought. As well as after purchase points status.
+    def history_update(self, item_name: str, item_quantity: int, points_balance: int):
+        date = datetime.now()
+        self.purchase_history.append((date, item_name, item_quantity, points_balance))
+
