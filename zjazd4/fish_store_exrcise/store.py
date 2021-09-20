@@ -104,7 +104,7 @@ class Store:
             card_used.add_points(points_amount)
             print(f'{points_amount} punkty dodane, całkowita ilość punktów: {card_used.collected_points}')
         else:
-            print('Do tej transakcji nie podano karty lojalnościowej')
+            print('Do tej transakcji nie wykorzystano karty lojalnościowej')
 
     def card_retriever(self):
         card_no = input('Podaj numer karty lojalnościowej (zostaw puste, jeżeli nie ma karty): ')
