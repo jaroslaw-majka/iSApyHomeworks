@@ -78,7 +78,7 @@ class Store:
 
     def drystock_display(self):
         for item in Store.drystock_list:
-            item.print_dry_stock_list()
+            print(item)
 
     def dry_stock_sale(self):
         item_for_sale = self.dry_stock_name_check()

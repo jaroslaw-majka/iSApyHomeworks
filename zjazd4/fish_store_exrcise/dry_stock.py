@@ -16,6 +16,12 @@ class DryStock:
         for key, value in vars(self).items():
             print(key, value)
 
+    # alternative for above stock displayer
+    def __str__(self):
+        return f'Nazwa: {vars(self)["item_name"]}, ' \
+               f'Producent: {vars(self)["brand"]}, ' \
+               f'Ilość sztuk: {vars(self)["stock"]}'
+
     def make_a_sale(self, amount):
         if isinstance(amount, (int, float)):
             self.stock -= amount
