@@ -1,5 +1,6 @@
 from dry_stock import DryStock
 from livestock import FishStock
+from customers import LoyaltyCard
 
 
 class Store:
@@ -19,7 +20,7 @@ class Store:
         print('4. Wyświetl dostępne suche produkty')
         print('5. Sprzedaj rybę')
         print('6. Sprzedaj suchy produkt')
-        # print('7. Dodaj nową kartę klienta')
+        print('7. Dodaj nową kartę klienta')
         # print('8. Wyświetl punkty klienta')
         print('0. Zamknij program')
         return input('Wybierz jedną z opcji: ')
@@ -91,6 +92,11 @@ class Store:
         else:
             print('Nie ma tego produktu na stanie.')
 
+    def add_new_loyalty_card(self):
+        customer_phone = input('Podaj numer telefonu klienta: ')
+        Store.card_list.append(LoyaltyCard(customer_phone))
+        print(Store.card_list)
+
     def main(self):
         while True:
             menu_choice = self.menu_interface()
@@ -108,6 +114,8 @@ class Store:
                 self.livestock_sale()
             elif menu_choice == '6':
                 self.dry_stock_sale()
+            elif menu_choice == '7':
+                self.add_new_loyalty_card()
 
 
 if __name__ == '__main__':
