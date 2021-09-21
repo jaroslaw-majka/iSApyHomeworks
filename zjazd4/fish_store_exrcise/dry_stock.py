@@ -27,7 +27,5 @@ class DryStock:
         :param amount: quantity of items sold that need to be deducted from available stock
         :return: updated stock
         '''
-        if isinstance(amount, (int, float)):
-            self.stock -= amount
-        else:
-            print('Podana ilość musi być liczbą')
+        self.stock -= amount
+

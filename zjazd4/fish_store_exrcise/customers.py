@@ -17,8 +17,7 @@ class LoyaltyCard:
         :param points_to_be_added: amount of points that will be added to this cards balance
         :return: current points balance
         """
-        if isinstance(points_to_be_added, int):
-            self.collected_points += points_to_be_added
+        self.collected_points += points_to_be_added
 
     def history_update(self, item_name: str, item_quantity: int, points_balance: int) -> Tuple:
         '''
