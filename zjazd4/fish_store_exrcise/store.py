@@ -1,4 +1,4 @@
-import sys
+import json
 
 from dry_stock import DryStock
 from livestock import FishStock
@@ -199,6 +199,27 @@ class Store:
         else:
             print('Nie ma karty o takim numerze.')
 
+    # TODO Reformat below method, so it accepts different dicts
+    def dict_converter(self):
+        holder_dict = {}
+        for i in range(len(Store.livestock_list)):
+            holder_dict[Store.livestock_list[i].name] = vars(Store.livestock_list[i])
+        print(holder_dict)
+        self.data_writer(holder_dict)
+
+    def data_writer(self, data_dict):
+        with open('stock_database.json', 'w') as write_file:
+            json.dump(data_dict, write_file)
+
+    def data_loader(self):
+        with open('stock_database.json', 'r') as load_file:
+            retrieved_data = json.load(load_file)
+        retrieved_data = json.dumps(retrieved_data)
+        retrieved_data = json.loads(retrieved_data)
+        # TODO convert to obj and save in a list
+        for key in retrieved_data:
+            print(type(retrieved_data.get(key)))
+
     def main(self):
         while True:
             menu_choice = self.menu_interface()
@@ -220,6 +241,11 @@ class Store:
                 self.add_new_loyalty_card()
             elif menu_choice == '8':
                 self.show_card_history()
+                # TODO Remove / reformat below commands
+            elif menu_choice == '9':
+                self.dict_converter()
+            elif menu_choice == '10':
+                self.data_loader()
 
 
 if __name__ == '__main__':
