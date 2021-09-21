@@ -1,3 +1,5 @@
+import sys
+
 from dry_stock import DryStock
 from livestock import FishStock
 from customers import LoyaltyCard
@@ -47,7 +49,10 @@ class Store:
         :return: instance of FishStock class or updated stock
         '''
         fish_name = input('Podaj nazwę ryby: ')
-        amount = int(input('Ile sztuk dodajesz: '))
+        try:
+            amount = int(input('Ile sztuk dodajesz: '))
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         fish_present = self.livestock_name_check(fish_name)
         if fish_present:
             fish_present.amount += amount
@@ -76,7 +81,10 @@ class Store:
         '''
         fish_for_sale = self.livestock_name_check()
         if fish_for_sale:
-            amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
+            try:
+                amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
+            except ValueError:
+                return print('To nie jest liczba całkowita.')
             if fish_for_sale.amount >= amount:
                 fish_for_sale.make_a_sale(amount)
                 self.loyalty_points_incrementator(amount, fish_for_sale.name)
@@ -105,7 +113,10 @@ class Store:
         :return: instance of DryStock class or updated stock
         '''
         item_name = input('Podaj nazwę produktu: ')
-        amount = int(input('Ile sztuk dodajesz: '))
+        try:
+            amount = int(input('Ile sztuk dodajesz: '))
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         item_present = self.dry_stock_name_check(item_name)
         if item_present:
             item_present.stock += amount
@@ -133,7 +144,10 @@ class Store:
         '''
         item_for_sale = self.dry_stock_name_check()
         if item_for_sale:
-            amount = int(input('Ile sztuk sprzedajesz: '))
+            try:
+                amount = int(input('Ile sztuk sprzedajesz: '))
+            except ValueError:
+                return print('To nie jest liczba całkowita.')
             if item_for_sale.stock >= amount:
                 item_for_sale.make_a_sale(amount)
                 self.loyalty_points_incrementator(amount, item_for_sale.item_name)
@@ -164,8 +178,12 @@ class Store:
         :return: card object
         '''
         card_no = input('Podaj numer karty lojalnościowej (zostaw puste, jeżeli nie ma karty): ')
+        try:
+            card_no = int(card_no)
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         for card in Store.card_list:
-            if card.card_idx == int(card_no):
+            if card.card_idx == card_no:
                 return card
 
     def show_card_history(self) -> str:
