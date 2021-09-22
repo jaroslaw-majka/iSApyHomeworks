@@ -2,8 +2,9 @@ import json
 
 
 class DataManager:
-    def __init__(self, list_for_saving):
+    def __init__(self, list_for_saving: list, json_file_name: str):
         self.list_for_saving = list_for_saving
+        self.json_file_name = json_file_name
         self.converted_dict = self.dict_converter()
 
     def dict_converter(self) -> dict:
@@ -17,11 +18,11 @@ class DataManager:
         return holder_dict
 
     def data_writer(self):
-        with open('stock_database.json', 'w') as write_file:
+        with open('data-files/' + self.json_file_name + '.json', 'w') as write_file:
             json.dump(self.converted_dict, write_file)
 
     def data_loader(self):
-        with open('stock_database.json', 'r') as load_file:
+        with open(self.json_file_name + '.json', 'r') as load_file:
             retrieved_data = json.load(load_file)
         retrieved_data = json.dumps(retrieved_data)
         retrieved_data = json.loads(retrieved_data)
