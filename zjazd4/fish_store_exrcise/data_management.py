@@ -6,7 +6,11 @@ class DataManager:
         self.list_for_saving = list_for_saving
         self.converted_dict = self.dict_converter()
 
-    def dict_converter(self):
+    def dict_converter(self) -> dict:
+        '''
+        Converts passed list into a dict ready to be saved in a JSON file
+        :return: dict
+        '''
         holder_dict = {}
         for i in range(len(self.list_for_saving)):
             holder_dict[self.list_for_saving[i].name] = vars(self.list_for_saving[i])
