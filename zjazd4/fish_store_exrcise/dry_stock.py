@@ -7,7 +7,7 @@ class DryStock:
             brand (str): item brand
             stock (int): item amount
         '''
-        self.item_name = item_name
+        self.name = item_name
         self.item_type = item_type
         self.brand = brand
         self.stock = stock
@@ -17,7 +17,7 @@ class DryStock:
         Overwrites the way data is presented when Store.drystock_display func is called
         :return: string formatting for list item display
         '''
-        return f'Nazwa: {vars(self)["item_name"]}, ' \
+        return f'Nazwa: {vars(self)["name"]}, ' \
                f'Producent: {vars(self)["brand"]}, ' \
                f'Ilość sztuk: {vars(self)["stock"]}'
 

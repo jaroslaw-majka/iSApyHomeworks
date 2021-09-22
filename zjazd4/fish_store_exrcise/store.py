@@ -1,8 +1,7 @@
-import json
-
 from dry_stock import DryStock
 from livestock import FishStock
 from customers import LoyaltyCard
+from data_management import DataManager
 
 
 class Store:
@@ -61,7 +60,7 @@ class Store:
             fish_origin = input('Skąd ryba pochodzi: ')
             Store.livestock_list.append(FishStock(fish_name, fish_origin, amount, freshwater))
 
-    def livestock_display(self) -> str:
+    def livestock_display(self) -> None:
         '''
         Prints live stock using list comprehension.
         :return: Fish stock
@@ -103,7 +102,7 @@ class Store:
         if not name:
             name = input('Jaki przedmiot sprzedajesz: ')
         for item in Store.dry_stock_list:
-            if item.item_name == name:
+            if item.name == name:
                 return item
 
     def adding_dry_stock(self) -> None:
@@ -125,7 +124,7 @@ class Store:
             item_brand = input('Podaj markę produktu: ')
             Store.dry_stock_list.append(DryStock(item_name, item_type, item_brand, amount))
 
-    def drystock_display(self) -> str:
+    def drystock_display(self) -> None:
         '''
         Prints dry stock using magic method __str__
         :return: Dry stock
@@ -150,9 +149,9 @@ class Store:
                 return print('To nie jest liczba całkowita.')
             if item_for_sale.stock >= amount:
                 item_for_sale.make_a_sale(amount)
-                self.loyalty_points_incrementator(amount, item_for_sale.item_name)
+                self.loyalty_points_incrementator(amount, item_for_sale.name)
             else:
-                print(f'Nie masz wystarczającej liczby {item_for_sale.item_name}')
+                print(f'Nie masz wystarczającej liczby {item_for_sale.name}')
         else:
             print('Nie ma tego produktu na stanie.')
 
@@ -186,7 +185,7 @@ class Store:
             if card.card_idx == card_no:
                 return card
 
-    def show_card_history(self) -> str:
+    def show_card_history(self) -> None:
         '''
         Shows transaction history for loyalty card instance
         :return: prints transaction history
@@ -199,31 +198,15 @@ class Store:
         else:
             print('Nie ma karty o takim numerze.')
 
-    # TODO Reformat below method, so it accepts different dicts
-    def dict_converter(self):
-        holder_dict = {}
-        for i in range(len(Store.livestock_list)):
-            holder_dict[Store.livestock_list[i].name] = vars(Store.livestock_list[i])
-        print(holder_dict)
-        self.data_writer(holder_dict)
-
-    def data_writer(self, data_dict):
-        with open('stock_database.json', 'w') as write_file:
-            json.dump(data_dict, write_file)
-
-    def data_loader(self):
-        with open('stock_database.json', 'r') as load_file:
-            retrieved_data = json.load(load_file)
-        retrieved_data = json.dumps(retrieved_data)
-        retrieved_data = json.loads(retrieved_data)
-        # TODO convert to obj and save in a list
-        for key in retrieved_data:
-            print(type(retrieved_data.get(key)))
+    def exit_program(self):
+        livestock_saver = DataManager(Store.livestock_list)
+        livestock_saver.dict_converter()
 
     def main(self):
         while True:
             menu_choice = self.menu_interface()
             if menu_choice == '0':
+                self.exit_program()
                 break
             elif menu_choice == '1':
                 self.adding_livestock()
