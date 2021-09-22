@@ -17,7 +17,10 @@ class DataManager:
             holder_dict[self.list_for_saving[i].name] = vars(self.list_for_saving[i])
         return holder_dict
 
-    def data_writer(self):
+    def data_writer(self) -> None:
+        '''
+        uses the converted dict and saves it in a json file
+        '''
         with open('data-files/' + self.json_file_name + '.json', 'w') as write_file:
             json.dump(self.converted_dict, write_file)
 

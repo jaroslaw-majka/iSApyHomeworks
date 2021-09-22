@@ -198,7 +198,11 @@ class Store:
         else:
             print('Nie ma karty o takim numerze.')
 
-    def exit_program(self):
+    def exit_program(self) -> None:
+        '''
+        Saves the data from lists (livestock_list, dry_stock_list and card_list) into a json files.
+        :return:
+        '''
         DataManager(Store.livestock_list, 'livestock').data_writer()
         DataManager(Store.dry_stock_list, 'drystock').data_writer()
         DataManager(Store.card_list, 'customercards').data_writer()
