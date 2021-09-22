@@ -159,8 +159,8 @@ class Store:
         '''
         :return: creates a new instance of LoyaltyCard and stores it in a card_list
         '''
-        customer_phone = input('Podaj numer telefonu klienta: ')
-        Store.card_list.append(LoyaltyCard(customer_phone))
+        customer_name = input('Podaj imię klienta: ')
+        Store.card_list.append(LoyaltyCard(customer_name))
 
     def loyalty_points_incrementator(self, points_amount: int, item_name: str) -> None:
         card_used = self.card_retriever()
@@ -201,13 +201,19 @@ class Store:
     def exit_program(self) -> None:
         '''
         Saves the data from lists (livestock_list, dry_stock_list and card_list) into a json files.
-        :return:
+        :return: None
         '''
         DataManager(Store.livestock_list, 'livestock').data_writer()
         DataManager(Store.dry_stock_list, 'drystock').data_writer()
         DataManager(Store.card_list, 'customercards').data_writer()
 
+    def load_data_from_files(self) -> None:
+        DataManager([], 'livestock').data_loader()
+        DataManager([], 'drystock').data_loader()
+        DataManager([], 'customercards').data_loader()
+
     def main(self):
+        self.load_data_from_files()
         while True:
             menu_choice = self.menu_interface()
             if menu_choice == '0':
@@ -229,11 +235,6 @@ class Store:
                 self.add_new_loyalty_card()
             elif menu_choice == '8':
                 self.show_card_history()
-                # TODO Remove / reformat below commands
-            elif menu_choice == '9':
-                self.dict_converter()
-            elif menu_choice == '10':
-                self.data_loader()
 
 
 if __name__ == '__main__':
