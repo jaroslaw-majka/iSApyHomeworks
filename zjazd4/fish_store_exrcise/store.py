@@ -208,9 +208,15 @@ class Store:
         DataManager(Store.card_list, 'customercards').data_writer()
 
     def load_data_from_files(self) -> None:
-        DataManager([], 'livestock').data_loader()
-        DataManager([], 'drystock').data_loader()
-        DataManager([], 'customercards').data_loader()
+        '''
+        Checks if there is any data for loading, loads it and saves in a list.
+        '''
+        if DataManager([], 'livestock').data_loader():
+            Store.livestock_list = DataManager([], 'livestock').data_loader()
+        if DataManager([], 'drystock').data_loader():
+            Store.dry_stock_list = DataManager([], 'drystock').data_loader()
+        if DataManager([], 'customercards').data_loader():
+            Store.card_list = DataManager([], 'customercards').data_loader()
 
     def main(self):
         self.load_data_from_files()

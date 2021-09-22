@@ -1,4 +1,7 @@
 import json
+from livestock import FishStock
+from dry_stock import DryStock
+from customers import LoyaltyCard
 
 
 class DataManager:
@@ -37,19 +40,42 @@ class DataManager:
             # TODO convert to obj and save in a list
             # Zaimportuj klasy live stock, dry stock i customers,
             # przekonwertuj dane w obiekty i zapisz w liście, którą zwrócisz.
+            loaded_list = []
             for key in retrieved_data:
                 if self.json_file_name == 'livestock':
-                    self.livestock_data_retirever(retrieved_data.get(key))
+                    loaded_list.append(self.livestock_data_retirever(retrieved_data.get(key)))
                 elif self.json_file_name == 'drystock':
-                    self.drystock_data_retirever()
+                    loaded_list.append(self.drystock_data_retirever(retrieved_data.get(key)))
                 elif self.json_file_name == 'customercards':
-                    self.customers_data_retirever()
+                    loaded_list.append(self.customers_data_retirever(retrieved_data.get(key)))
+            return loaded_list
 
-    def livestock_data_retirever(self, data_to_obj) -> list:
-        print(data_to_obj)
+    def livestock_data_retirever(self, data_to_obj: dict) -> object:
+        '''
+        Converts input data of dict type to a FishStock class instance
+        :param data_to_obj: dict object
+        :return: FishStock class instance
+        '''
+        return FishStock(data_to_obj['name'], data_to_obj['origin'], data_to_obj['amount'], data_to_obj['freshwater'])
 
-    def drystock_data_retirever(self) -> list:
-        pass
+    def drystock_data_retirever(self, data_to_obj) -> object:
+        '''
+        Converts input data of dict type to a DryStock class instance
+        :param data_to_obj: dict object
+        :return: DryStock class instance
+        '''
+        return DryStock(data_to_obj['name'], data_to_obj['item_type'], data_to_obj['brand'], data_to_obj['stock'])
 
-    def customers_data_retirever(self) -> list:
-        pass
+    def customers_data_retirever(self, data_to_obj) -> object:
+        '''
+        Converts input data of dict type into a LoyaltyCard class instance.
+        Class attributes need to be provided step by step because constructor of a class accepts only one attribute.
+        :param data_to_obj: dict object
+        :return: LoyaltyCard class isntance
+        '''
+        converted_object = LoyaltyCard(data_to_obj['name'])
+        converted_object.card_idx = data_to_obj['card_idx']
+        converted_object.collected_points = data_to_obj['collected_points']
+        converted_object.purchase_history = data_to_obj['purchase_history']
+        LoyaltyCard.next_card_idx = data_to_obj['card_idx'] + 1
+        return converted_object

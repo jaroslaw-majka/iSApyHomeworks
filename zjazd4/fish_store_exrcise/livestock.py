@@ -9,7 +9,7 @@ class FishStock:
         '''
         self.name = name
         self.origin = origin
-        self.amount = amount
+        self.amount = int(amount)
         self.freshwater = freshwater
 
     def make_a_sale(self, amount: int) -> int:
