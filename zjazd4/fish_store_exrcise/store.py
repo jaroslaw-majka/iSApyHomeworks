@@ -1,6 +1,7 @@
 from dry_stock import DryStock
 from livestock import FishStock
 from customers import LoyaltyCard
+from data_management import DataManager
 
 
 class Store:
@@ -47,7 +48,10 @@ class Store:
         :return: instance of FishStock class or updated stock
         '''
         fish_name = input('Podaj nazwę ryby: ')
-        amount = int(input('Ile sztuk dodajesz: '))
+        try:
+            amount = int(input('Ile sztuk dodajesz: '))
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         fish_present = self.livestock_name_check(fish_name)
         if fish_present:
             fish_present.amount += amount
@@ -56,7 +60,7 @@ class Store:
             fish_origin = input('Skąd ryba pochodzi: ')
             Store.livestock_list.append(FishStock(fish_name, fish_origin, amount, freshwater))
 
-    def livestock_display(self) -> str:
+    def livestock_display(self) -> None:
         '''
         Prints live stock using list comprehension.
         :return: Fish stock
@@ -76,7 +80,10 @@ class Store:
         '''
         fish_for_sale = self.livestock_name_check()
         if fish_for_sale:
-            amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
+            try:
+                amount = int(input(f'Ile {fish_for_sale.name} chciałbyś sprzedać: '))
+            except ValueError:
+                return print('To nie jest liczba całkowita.')
             if fish_for_sale.amount >= amount:
                 fish_for_sale.make_a_sale(amount)
                 self.loyalty_points_incrementator(amount, fish_for_sale.name)
@@ -95,7 +102,7 @@ class Store:
         if not name:
             name = input('Jaki przedmiot sprzedajesz: ')
         for item in Store.dry_stock_list:
-            if item.item_name == name:
+            if item.name == name:
                 return item
 
     def adding_dry_stock(self) -> None:
@@ -105,7 +112,10 @@ class Store:
         :return: instance of DryStock class or updated stock
         '''
         item_name = input('Podaj nazwę produktu: ')
-        amount = int(input('Ile sztuk dodajesz: '))
+        try:
+            amount = int(input('Ile sztuk dodajesz: '))
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         item_present = self.dry_stock_name_check(item_name)
         if item_present:
             item_present.stock += amount
@@ -114,7 +124,7 @@ class Store:
             item_brand = input('Podaj markę produktu: ')
             Store.dry_stock_list.append(DryStock(item_name, item_type, item_brand, amount))
 
-    def drystock_display(self) -> str:
+    def drystock_display(self) -> None:
         '''
         Prints dry stock using magic method __str__
         :return: Dry stock
@@ -133,12 +143,15 @@ class Store:
         '''
         item_for_sale = self.dry_stock_name_check()
         if item_for_sale:
-            amount = int(input('Ile sztuk sprzedajesz: '))
+            try:
+                amount = int(input('Ile sztuk sprzedajesz: '))
+            except ValueError:
+                return print('To nie jest liczba całkowita.')
             if item_for_sale.stock >= amount:
                 item_for_sale.make_a_sale(amount)
-                self.loyalty_points_incrementator(amount, item_for_sale.item_name)
+                self.loyalty_points_incrementator(amount, item_for_sale.name)
             else:
-                print(f'Nie masz wystarczającej liczby {item_for_sale.item_name}')
+                print(f'Nie masz wystarczającej liczby {item_for_sale.name}')
         else:
             print('Nie ma tego produktu na stanie.')
 
@@ -146,8 +159,8 @@ class Store:
         '''
         :return: creates a new instance of LoyaltyCard and stores it in a card_list
         '''
-        customer_phone = input('Podaj numer telefonu klienta: ')
-        Store.card_list.append(LoyaltyCard(customer_phone))
+        customer_name = input('Podaj imię klienta: ')
+        Store.card_list.append(LoyaltyCard(customer_name))
 
     def loyalty_points_incrementator(self, points_amount: int, item_name: str) -> None:
         card_used = self.card_retriever()
@@ -164,11 +177,15 @@ class Store:
         :return: card object
         '''
         card_no = input('Podaj numer karty lojalnościowej (zostaw puste, jeżeli nie ma karty): ')
+        try:
+            card_no = int(card_no)
+        except ValueError:
+            return print('To nie jest liczba całkowita.')
         for card in Store.card_list:
-            if card.card_idx == int(card_no):
+            if card.card_idx == card_no:
                 return card
 
-    def show_card_history(self) -> str:
+    def show_card_history(self) -> None:
         '''
         Shows transaction history for loyalty card instance
         :return: prints transaction history
@@ -181,10 +198,32 @@ class Store:
         else:
             print('Nie ma karty o takim numerze.')
 
+    def exit_program(self) -> None:
+        '''
+        Saves the data from lists (livestock_list, dry_stock_list and card_list) into a json files.
+        :return: None
+        '''
+        DataManager(Store.livestock_list, 'livestock').data_writer()
+        DataManager(Store.dry_stock_list, 'drystock').data_writer()
+        DataManager(Store.card_list, 'customercards').data_writer()
+
+    def load_data_from_files(self) -> None:
+        '''
+        Checks if there is any data for loading, loads it and saves in a list.
+        '''
+        if DataManager([], 'livestock').data_loader():
+            Store.livestock_list = DataManager([], 'livestock').data_loader()
+        if DataManager([], 'drystock').data_loader():
+            Store.dry_stock_list = DataManager([], 'drystock').data_loader()
+        if DataManager([], 'customercards').data_loader():
+            Store.card_list = DataManager([], 'customercards').data_loader()
+
     def main(self):
+        self.load_data_from_files()
         while True:
             menu_choice = self.menu_interface()
             if menu_choice == '0':
+                self.exit_program()
                 break
             elif menu_choice == '1':
                 self.adding_livestock()

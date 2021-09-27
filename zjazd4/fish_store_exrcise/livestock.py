@@ -9,7 +9,7 @@ class FishStock:
         '''
         self.name = name
         self.origin = origin
-        self.amount = amount
+        self.amount = int(amount)
         self.freshwater = freshwater
 
     def make_a_sale(self, amount: int) -> int:
@@ -18,7 +18,4 @@ class FishStock:
         :param amount: quantity of items sold that need to be deducted from available stock
         :return: updated stock
         '''
-        if isinstance(amount, (int, float)):
-            self.amount -= amount
-        else:
-            print('Podana ilość musi być liczbą')
+        self.amount -= amount
