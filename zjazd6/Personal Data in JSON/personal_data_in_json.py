@@ -23,6 +23,7 @@ def personal_data_input() -> dict:
 def phone_no_format_check(phone_no) -> bool:
     """Checks given string (phone number) against patterns"""
     allowed_patterns = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',
+                        # TODO This cantake 10 symbols and return true. Check it.
                         r'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]',
                         r'[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]']
     match = []
