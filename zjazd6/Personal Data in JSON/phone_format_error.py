@@ -5,4 +5,5 @@ class Error(Exception):
 
 class PhoneFormatError(Error):
     """Raised error if give phone number format is invalid"""
-    pass
+    def __init__(self):
+        self.message = 'Wrong phone number format!'
