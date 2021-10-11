@@ -7,20 +7,26 @@ def personal_data_input():
     last_name = input('Podaj nazwisko: ')
     try:
         telephone_no = input('Podaj numer telefonu: ')
-        if phone_no_format_check(telephone_no):
+        if not phone_no_format_check(telephone_no):
             raise PhoneFormatError
     except PhoneFormatError as error:
         print(error.message)
-    else:
-        print('Lucky')
+    return {(first_name, last_name): telephone_no}
 
 
 def phone_no_format_check(phone_no):
-    allowed_formats = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',
-                       r'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]',
-                       r'[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]']
-    match = search(r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]', phone_no)
-    if not match:
+    allowed_patterns = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',
+                        r'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]',
+                        r'[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]']
+    match = []
+    for pattern in allowed_patterns:
+        if search(pattern, phone_no):
+            match.append(True)
+        else:
+            match.append(False)
+    if len(phone_no) != 9 or len(phone_no) != 11:
+        return False
+    if True in match:
         return True
 
 
