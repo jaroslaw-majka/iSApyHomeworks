@@ -22,19 +22,14 @@ def personal_data_input() -> dict:
 
 def phone_no_format_check(phone_no) -> bool:
     """Checks given string (phone number) against patterns"""
-    allowed_patterns = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',
-                        # TODO This cantake 10 symbols and return true. Check it.
-                        r'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]',
-                        r'[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]']
-    match = []
-    for pattern in allowed_patterns:
-        if search(pattern, phone_no):
-            match.append(True)
-        else:
-            match.append(False)
-
-    if True in match:
-        return True
+    if len(phone_no) in [9, 11]:
+        allowed_patterns = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',
+                            # TODO This cantake 10 symbols and return true. Check it.
+                            r'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]',
+                            r'[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]']
+        for pattern in allowed_patterns:
+            if search(pattern, phone_no):
+                return True
 
 
 def data_saving(data: dict):
