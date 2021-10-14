@@ -37,9 +37,6 @@ class DataManager:
             print('File found')
             retrieved_data = json.dumps(retrieved_data)
             retrieved_data = json.loads(retrieved_data)
-            # TODO convert to obj and save in a list
-            # Zaimportuj klasy live stock, dry stock i customers,
-            # przekonwertuj dane w obiekty i zapisz w liście, którą zwrócisz.
             loaded_list = []
             for key in retrieved_data:
                 if self.json_file_name == 'livestock':
