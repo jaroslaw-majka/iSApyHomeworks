@@ -10,7 +10,7 @@ def personal_data_input() -> dict:
     last_name = input('Podaj nazwisko: ')
     try:
         telephone_no = input('Podaj numer telefonu: ')
-        if not phone_no_format_check(telephone_no):
+        if not phone_no_format_valid(telephone_no):
             raise PhoneFormatError
     except PhoneFormatError as error:
         print(error.message)
@@ -20,7 +20,7 @@ def personal_data_input() -> dict:
     return {'imię': first_name, 'nazwisko': last_name, 'telefon': telephone_no}
 
 
-def phone_no_format_check(phone_no) -> bool:
+def phone_no_format_valid(phone_no) -> bool:
     """Checks given string (phone number) against patterns"""
     if len(phone_no) in [9, 11]:
         allowed_patterns = [r'[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]',

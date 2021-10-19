@@ -12,6 +12,6 @@ class User(Human):
     def age(self) -> int:
         if self._age:
             return self._age
-        year_of_birth = int(self.date_of_birth.split('/')[2])
+        year_of_birth = int(self.date_of_birth.year)
         current_year = datetime.datetime.now().year
         return current_year - year_of_birth
