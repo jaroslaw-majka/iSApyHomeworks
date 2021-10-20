@@ -1,5 +1,4 @@
 from datetime import datetime
-from re import search
 
 
 class Human:
