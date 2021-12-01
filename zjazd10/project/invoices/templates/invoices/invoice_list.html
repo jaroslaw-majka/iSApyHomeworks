@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-
+    <ul>
+        {% for invoice in object_list %}
+        <li>{{invoice.number}}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

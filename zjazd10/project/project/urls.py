@@ -20,5 +20,5 @@ from invoices.views import InvoiceListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('invoices/', InvoiceListView.as_view()),
+    path('invoices/', InvoiceListView.as_view(), name='invoice_list'),
 ]
