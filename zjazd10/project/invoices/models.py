@@ -83,4 +83,4 @@ class Invoice(models.Model):
     )
 
     def __str__(self):
-        return self.number
+        return f'Numer: {self.number} / Kwota: {self.service.price} / Data płatności: {self.payment_date}'
