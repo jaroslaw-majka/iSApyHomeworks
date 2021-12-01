@@ -3,9 +3,18 @@
 {% block title %}Faktury{% endblock %}
 
 {% block content %}
-    <ul>
+    <table>
+        <tr>
+            <th>Numer</th>
+            <th>Usługa</th>
+            <th>Data płatności</th>
+        </tr>
         {% for invoice in object_list %}
-        <li>{{invoice.number}}</li>
+        <tr>
+            <th>{{invoice.number}}</th>
+            <th>{{invoice.service}}</th>
+            <th>{{invoice.payment_date}}</th>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
