@@ -41,6 +41,9 @@ class Issuer(models.Model):
         verbose_name='adres',
     )
 
+    def __str__(self):
+        return self.company_name
+
 
 class Service(models.Model):
     service_name = models.CharField(
@@ -52,6 +55,9 @@ class Service(models.Model):
         decimal_places=2,
         max_digits=5,
     )
+
+    def __str__(self):
+        return self.service_name
 
 
 class Invoice(models.Model):
@@ -75,3 +81,6 @@ class Invoice(models.Model):
     payment_status = models.BooleanField(
         'status płatności',
     )
+
+    def __str__(self):
+        return self.number
