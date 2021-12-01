@@ -1,5 +1,6 @@
 from django.contrib import admin
-from invoices.models import Invoice, Address, Issuer, Service
+
+from invoices.models import Address, Invoice, Issuer, Service
 
 
 @admin.register(Invoice)
