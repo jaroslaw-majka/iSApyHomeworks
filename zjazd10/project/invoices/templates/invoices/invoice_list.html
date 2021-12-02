@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load invoice_templatetags %}
 
 {% block title %}Faktury{% endblock %}
 
@@ -19,5 +20,5 @@
         </tr>
         {% endfor %}
     </table>
-    Całkowita kwota do zapłaty wynosi {{ total_ammount }}zł
+    <p>Całkowita kwota do zapłaty wynosi {{ total_ammount }}zł</p>
 {% endblock %}
