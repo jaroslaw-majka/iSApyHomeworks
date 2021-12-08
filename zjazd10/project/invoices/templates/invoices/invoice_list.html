@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% load invoice_templatetags %}
+{% load invoice_templatetags static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'invoices/style.css' %}">
 
 {% block title %}Faktury{% endblock %}
 
@@ -12,7 +14,7 @@
             <th>Kwota</th>
         </tr>
         {% for invoice in object_list %}
-        <tr>
+        <tr class="{{ invoice.payment_date|row_styler }}">
             <th>{{invoice.number}}</th>
             <th>{{invoice.service}}</th>
             <th>{{invoice.payment_date}}</th>

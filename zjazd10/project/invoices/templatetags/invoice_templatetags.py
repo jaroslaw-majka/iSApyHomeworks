@@ -1,10 +1,11 @@
 from django import template
-from django.utils.safestring import mark_safe
+from datetime import date
 
 register = template.Library()
 
 
 @register.filter
-def row_styler(invoice):
-    style = 'color: red'
-    return mark_safe(style)
+def row_styler(payment_date):
+    today = date.today()
+    if (payment_date - today).days > 7:
+        return 'due'
