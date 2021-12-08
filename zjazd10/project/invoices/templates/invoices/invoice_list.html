@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load invoice_templatetags static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'invoices/style.css' %}">
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'invoices/style.css' %}">
+{% endblock %}
 
 {% block title %}Faktury{% endblock %}
 
