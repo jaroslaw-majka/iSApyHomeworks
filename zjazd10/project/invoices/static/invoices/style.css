@@ -1,3 +1,6 @@
 .due {
     color: darkgreen;
 }
+.paid {
+    text-decoration: underline;
+}

@@ -16,7 +16,7 @@
             <th>Kwota</th>
         </tr>
         {% for invoice in object_list %}
-        <tr class="{{ invoice.payment_date|row_styler }}">
+        <tr class="{{ invoice|row_styler }}">
             <th>{{invoice.number}}</th>
             <th>{{invoice.service}}</th>
             <th>{{invoice.payment_date}}</th>
