@@ -4,3 +4,9 @@
 .paid {
     text-decoration: underline;
 }
+.pay-now {
+    color: yellow;
+}
+.overdue {
+    color: red;
+}

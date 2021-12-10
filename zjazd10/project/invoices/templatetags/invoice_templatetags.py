@@ -13,3 +13,7 @@ def row_styler(invoice):
         return 'paid'
     elif (payment_date - today).days > 7:
         return 'due'
+    elif 0 < (payment_date - today).days < 7:
+        return 'pay-now'
+    elif (payment_date - today).days < 1:
+        return 'overdue'
