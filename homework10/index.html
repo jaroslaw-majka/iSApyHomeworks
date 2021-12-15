@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pizzeria u Majora</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -10,17 +12,24 @@
 </head>
 <body>
 <!-- Nav Bar -->
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-primary navbar-expand-md">
     <div class="container">
-        <span class="font-weight-bold text-light">
-            <a href="#store-information" class="font-weight-bold text-light">Strona główna</a>
-        </span>
-        <span class="font-weight-bold text-light">
-            Menu
-        </span>
-        <span class="font-weight-bold text-light">
-            Kontakt
-        </span>
+        <a href="#store-information" class="navbar-brand">
+            <span class="font-weight-bold text-light">
+                Pizzeria u Majora
+            </span>
+        </a>
+
+        <div class="justify-content-end align-center" id="main-nav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#contact">Kontakt</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
