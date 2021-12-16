@@ -116,59 +116,71 @@
 <!-- Contact form -->
 <section id="contact" class="container">
     <div class="text-center p-5">
-            <h3>Kontakt</h3>
-            <p class="lead text-muted">Wyślij nam wiadomość</p>
-        </div>
+        <h3>Kontakt</h3>
+        <p class="lead text-muted">Wyślij nam wiadomość</p>
+    </div>
     <form class="mb-5">
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="validationDefault01">First name</label>
+                <label for="validationDefault01">Imię</label>
                 <input type="text" class="form-control" id="validationDefault01"
-                       placeholder="First name" value="Mark" required>
+                       placeholder="Imię" required>
             </div>
             <div class="col-md-4 mb-3">
-                <label for="validationDefault02">Last name</label>
+                <label for="validationDefault02">Nazwisko</label>
                 <input type="text" class="form-control" id="validationDefault02"
-                       placeholder="Last name" value="Otto" required>
+                       placeholder="Nazwisko" required>
             </div>
             <div class="col-md-4 mb-3">
-                <label for="validationDefaultUsername">Username</label>
+                <label for="validationDefaultUsername">Numer telefonu</label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                    </div>
                     <input type="text" class="form-control" id="validationDefaultUsername"
-                           placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                           placeholder="Numer telefonu" aria-describedby="inputGroupPrepend2"
+                           required>
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label for="validationDefault03">City</label>
-                <input type="text" class="form-control" id="validationDefault03" placeholder="City"
+                <label for="validationDefault03">Ulica</label>
+                <input type="text" class="form-control" id="validationDefault03"
+                       placeholder="Ulica, numer domu, numer mieszkania"
                        required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationDefault04">State</label>
+                <label for="validationDefault04">Miasto</label>
                 <input type="text" class="form-control" id="validationDefault04"
-                       placeholder="State" required>
+                       placeholder="Miasto" required>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="validationDefault05">Zip</label>
-                <input type="text" class="form-control" id="validationDefault05" placeholder="Zip"
+                <label for="validationDefault05">Kod pocztowy</label>
+                <input type="text" class="form-control" id="validationDefault05"
+                       placeholder="Kod pocztowy"
                        required>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Wybierz pozycję z menu</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>Grube hawaje</option>
+                <option>Wściekła kura</option>
+                <option>Suchy grubas</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Widomość dla dostawcy</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Pole nieobowiązkowe"></textarea>
         </div>
         <div class="form-group">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck2"
                        required>
                 <label class="form-check-label" for="invalidCheck2">
-                    Agree to terms and conditions
+                    Zgoda RODO
                 </label>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button class="btn btn-primary" type="submit">Wyslij</button>
     </form>
 </section>
 
